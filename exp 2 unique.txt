@@ -1,0 +1,112 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 15
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| collage            |
+| faculty            |
+| mates              |
+| mysql              |
+| performance_schema |
+| student            |
+| test               |
++--------------------+
+8 rows in set (0.00 sec)
+
+mysql> use faculty;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_faculty |
++-------------------+
+| faculty           |
++-------------------+
+1 row in set (0.01 sec)
+
+mysql> use faculty;
+Database changed
+mysql> create table principal(PriNo varchar(4),PriName varchar(15),Gender char(1),DOB date,DOJ date,mobileNumber int(10));
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> desc faculty;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| FacNo        | varchar(4)  | YES  |     | NULL    |       |
+| FacName      | varchar(15) | YES  |     | NULL    |       |
+| Gender       | char(1)     | YES  |     | NULL    |       |
+| DOJ          | date        | YES  |     | NULL    |       |
+| mobileNumber | int(10)     | NO   | PRI | 0       |       |
+| location     | varchar(15) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> desc principal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| PriNo        | varchar(4)  | YES  |     | NULL    |       |
+| PriName      | varchar(15) | YES  |     | NULL    |       |
+| Gender       | char(1)     | YES  |     | NULL    |       |
+| DOB          | date        | YES  |     | NULL    |       |
+| DOJ          | date        | YES  |     | NULL    |       |
+| mobileNumber | int(10)     | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.02 sec)
+
+mysql> select * from faculty;
+Empty set (0.00 sec)
+
+mysql> select * from principal;
+Empty set (0.00 sec)
+
+mysql> alter table principal add foreign key (mobileNumber) references faculty (mobileNumber);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc principal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| PriNo        | varchar(4)  | YES  |     | NULL    |       |
+| PriName      | varchar(15) | YES  |     | NULL    |       |
+| Gender       | char(1)     | YES  |     | NULL    |       |
+| DOB          | date        | YES  |     | NULL    |       |
+| DOJ          | date        | YES  |     | NULL    |       |
+| mobileNumber | int(10)     | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.01 sec)
+
+mysql> alter table principal add unique(mobileNumber);
+ERROR 1280 (42000): Incorrect index name 'mobileNumber'
+mysql> alter table principal add unique(PriNo);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc principal;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| PriNo        | varchar(4)  | YES  | UNI | NULL    |       |
+| PriName      | varchar(15) | YES  |     | NULL    |       |
+| Gender       | char(1)     | YES  |     | NULL    |       |
+| DOB          | date        | YES  |     | NULL    |       |
+| DOJ          | date        | YES  |     | NULL    |       |
+| mobileNumber | int(10)     | YES  | MUL | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+6 rows in set (0.00 sec)
+
+mysql>
