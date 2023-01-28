@@ -1,0 +1,82 @@
+Enter password: *****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 33
+Server version: 5.5.62 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> use mates;
+Database changed
+mysql> create table progress(stud_id int(15),stud_name varchar(15),class varchar(15),attendance int(15),feedback varchar(16));
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> insert into progress values(1,'vineesh','science',98,'very good');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into progress values(2,'ravi','maths',50,'has to improve');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into progress values(3,'vinay','maths',70,'good');
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into progress values(4,'maya','science',28,'very poor');
+Query OK, 1 row affected (0.00 sec)
+
+mysql>  insert into progress values(5,'kavya','science',73,'good');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from progress;
++---------+-----------+---------+------------+----------------+
+| stud_id | stud_name | class   | attendance | feedback       |
++---------+-----------+---------+------------+----------------+
+|       1 | vineesh   | science |         98 | very good      |
+|       2 | ravi      | maths   |         50 | has to improve |
+|       3 | vinay     | maths   |         70 | good           |
+|       4 | maya      | science |         28 | very poor      |
+|       5 | kavya     | science |         73 | good           |
++---------+-----------+---------+------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql>  select * from progress order by attendance;
++---------+-----------+---------+------------+----------------+
+| stud_id | stud_name | class   | attendance | feedback       |
++---------+-----------+---------+------------+----------------+
+|       4 | maya      | science |         28 | very poor      |
+|       2 | ravi      | maths   |         50 | has to improve |
+|       3 | vinay     | maths   |         70 | good           |
+|       5 | kavya     | science |         73 | good           |
+|       1 | vineesh   | science |         98 | very good      |
++---------+-----------+---------+------------+----------------+
+5 rows in set (0.00 sec)
+
+mysql> select avg(attendance) from progress;
++-----------------+
+| avg(attendance) |
++-----------------+
+|         63.8000 |
++-----------------+
+1 row in set (0.00 sec)
+
+mysql> select max(attendance),feedback from progress;
++-----------------+-----------+
+| max(attendance) | feedback  |
++-----------------+-----------+
+|              98 | very good |
++-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql>  select stud_name,max(attendance),feedback from progress;
++-----------+-----------------+-----------+
+| stud_name | max(attendance) | feedback  |
++-----------+-----------------+-----------+
+| vineesh   |              98 | very good |
++-----------+-----------------+-----------+
+1 row in set (0.00 sec)
+
+mysql>
